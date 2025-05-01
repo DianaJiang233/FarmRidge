@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@200&display=block" rel="stylesheet">
+  <title>午夜梦境</title>
+  <style>
+    body {
+            margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+      font-family: 'Handjet', cursive;
+      text-align: center;
+      color: white;
+ font-size: 50px; /* 默认字体大小设置成稍大一点 */    }
+    #storyBox {
+      display: none;
+      margin-top: 20px;
+      font-size: 27.5px;
+    }
+    #dreamImg {
+    margin-top: 20px;
+      display: none;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 12px;
+      //box-shadow: 0 0 30px rgba(255,255,255,0.4);
+    }
+    a {
+      color: cyan;
+      font-size: 27.5px;
+      text-decoration: none;
+    }
+#title {
+  font-size: 39.5px;
+font-family: 'Handjet', cursive;
+
+}
+
+
+  </style>
+</head>
+<body>
+  <h1 id="title">午夜之谜</h1>
+  <div id="storyBox"></div>
+  <img id="dreamImg" src="" alt="Dream Image">
+  <div id="websiteLink"></div>
+
+  <script>
+    function checkTimeAndDisplay() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+
+      const title = document.getElementById('title');
+      const storyBox = document.getElementById('storyBox');
+      const dreamImg = document.getElementById('dreamImg');
+      const websiteLink = document.getElementById('websiteLink');
+
+      // Reset everything first
+      storyBox.style.display = "none";
+      dreamImg.style.display = "none";
+      websiteLink.innerHTML = "";
+
+      if (hours === 17 && minutes >= 20 && minutes <= 50) {
+        // Between 12:00 AM and 12:05 AM -> Random website
+        const websites = [
+          { name: "under the stars", url: "https://dianajiang233.github.io/GooseSing/" },
+          { name: "next to the moon", url: "https://weifanjiang233.github.io/lalalan/" },
+          { //name: "in the goose shed", url: "https://dianajiang233.github.io/TamagotchiWeb/" }
+        ];
+        const randomSite = websites[Math.floor(Math.random() * websites.length)];
+
+        title.textContent = "Today the goose meet you...";
+        websiteLink.innerHTML = `<a href="${randomSite.url}" target="_blank">${randomSite.name}</a>`;
+
+      } else {
+        // Other time -> show vampire dream
+        title.textContent = "As a vampire, you are dreaming...";
+
+        const dreams = [
+         {text: "The rainy dusk after school was a pale grey. You and another vampire stood together, watching the rain fall.", img: "https://dianajiang233.github.io/GooseSing/greyrain).gif"},
+      {text: "As you swung your arms upward, the airflow lifted you to an unexpected height. The temple, its stone-paved streets, and the people grew distant below you.", img: "https://dianajiang233.github.io/GooseSing/fly.gif"},
+      {text: "You wander through every corner of the apartment, on the edge of sleep. Deep orange and blue fall upon the windows. You linger in front of the fridge.", img: "https://dianajiang233.github.io/GooseSing/frige.gif"},
+      {text: "You flew out of the factory, a place filled with waste and watch. But the one escaping with you was still at the window — you reached out, but only managed to pull half of their body.", img: "https://dianajiang233.github.io/GooseSing/windowout3.gif"},
+      {text: "You're sketching, and a dog sits beside you, watching. It's a dog from the crematorium—its fur is sparse, but very clean.", img: "https://dianajiang233.github.io/GooseSing/sketch.gif"}
+        ];
+        const dream = dreams[Math.floor(Math.random() * dreams.length)];
+
+        storyBox.innerText = dream.text;
+        storyBox.style.display = "block";
+        dreamImg.src = dream.img;
+        dreamImg.style.display = "block";
+      }
+    }
+
+    // Run once when the page loads
+    checkTimeAndDisplay();
+
+    // Optional: Update every minute
+    setInterval(checkTimeAndDisplay, 60000);
+  </script>
+</body>
+</html>
